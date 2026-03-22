@@ -5,8 +5,9 @@ import gymnasium
 
 
 
-
-
+class Player:
+	def __init__(self, screen):
+		self.pos = pygame.Vector2(screen.get_width() /2 , screen.get_height() / 2)
 
 
 
@@ -18,6 +19,10 @@ def main():
 	screen = pygame.display.set_mode((1280, 720))
 	clock = pygame.time.Clock()
 	running = True
+	dt = 0
+
+	player = Player(screen)
+
 
 
 	while running:
@@ -25,7 +30,17 @@ def main():
 			if event.type == pygame.QUIT:
 				running = False
 
-		screen.fill("purple")
+
+
+		screen.fill("yellow")
+
+		pygame.draw.circle(screen,"red",player.pos, 40)
+
+
+		keys = pygame.key.get_pressed()
+
+		if keys[pygame.K_w]:
+			player.pos.y -= 300 * dt
 
 		#this is where you are supposed to render the game
 
@@ -35,7 +50,7 @@ def main():
 		pygame.display.flip()
 
 
-		clock.tick(60) # this limits FPS to 60
+		dt = clock.tick(60) / 1000 # this limits FPS to 60
 
 
 	pygame.quit()
