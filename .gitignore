@@ -1,4 +1,5 @@
-
-
-
+# Ignore virtual environment
 .venv
+tb_logs
+__pycache__
+models
